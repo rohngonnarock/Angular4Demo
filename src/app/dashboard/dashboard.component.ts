@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { DataService } from './data.service';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 import { Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class AppComponent {
+export class DashboardComponent implements OnInit {
   title = 'Angular App';
   public currentStep: number;
   public values: any[];
@@ -17,7 +17,8 @@ export class AppComponent {
     this.currentStep = 0;
   }
   showDetail(id: void) {
-    this.router.navigate(['/home', id]);
+    this._dataService.setItem(this.values, id)
+    this.router.navigate(['/detail', id]);
   }
   back() {
     this.currentStep -= 5;
@@ -36,5 +37,5 @@ export class AppComponent {
   ngOnInit() {
     this.getData()
   }
-}
 
+}
