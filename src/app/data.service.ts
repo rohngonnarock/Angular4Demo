@@ -60,6 +60,7 @@ export class CustomInterceptor implements HttpInterceptor {
     }
 
     req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+    req = req.clone({ headers: req.headers.set('Origin', 'http://evil.com') });
     console.log(JSON.stringify(req.headers));
     return next.handle(req);
   }

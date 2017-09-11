@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { ProserviceService } from '../proservice.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,11 +11,14 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   title = 'Angular App';
   public currentStep: number;
-  public values: any[];
+  public values: any;
   constructor(
-    private _dataService: DataService, private router: Router,
+    private _dataService: DataService,
+    private router: Router,
+    private _proserviceService: ProserviceService
   ) {
     this.currentStep = 0;
+    this.values = {};
   }
   showDetail(id: void) {
     this._dataService.setItem(this.values, id)
@@ -34,8 +38,16 @@ export class DashboardComponent implements OnInit {
       .subscribe((data: any[]) => this.values = data,
       error => (err) => { }, () => { });
   }
+  getProServiceData() {
+    var jthis = this;
+    this._proserviceService.getHeroes(0).then(function (data: any) {
+      console.log(jthis.values);
+      jthis.values = data;
+    })
+  }
   ngOnInit() {
-    this.getData()
+    //this.getData()
+    this.getProServiceData()
   }
 
 }

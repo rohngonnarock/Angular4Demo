@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { DataService } from './data.service';
+import { ProserviceService } from './proservice.service';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './detail/detail.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { DetailComponent } from './detail/detail.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [DataService],
+  providers: [DataService, ProserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
